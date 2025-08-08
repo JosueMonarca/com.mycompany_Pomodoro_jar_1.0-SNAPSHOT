@@ -1,4 +1,4 @@
-package com.mycompany.pomodoro.view.componentes;
+package com.mycompany.pomodoro.view.components;
 
 import java.awt.Color;
 import java.awt.GradientPaint;

@@ -30,7 +30,7 @@ public class WorkTimeView extends AbstractView {
         PomodoroConfig config = PomodoroConfig.getInstance();
         config.setTrabajo(total);
         
-        if(config.getTrabajo() != 0){
+        if(config.getJob() != 0){
             view.setTextLabelReloj("00:00:00");
             view.setTextInstrucciones("Ingrese el tiempo de descanso");
             return true;

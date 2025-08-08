@@ -2,6 +2,7 @@
 package com.mycompany.pomodoro.view;
 
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,23 +14,19 @@ public class MainFrame extends javax.swing.JFrame implements IView{
     public MainFrame() {
         initComponents();
     }
-    
-    public MainFrame(UserFlowController controller){
-        jButton1.addActionListener(e -> controller.next());
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelPrincipal = new com.mycompany.pomodoro.view.componentes.CustomPanel();
-        CustomPanel2 = new com.mycompany.pomodoro.view.componentes.CustomPanel();
+        PanelPrincipal = new com.mycompany.pomodoro.view.components.CustomPanel();
+        CustomPanel2 = new com.mycompany.pomodoro.view.components.CustomPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        labelDeReloj = new javax.swing.JLabel();
+        labelOfClock = new javax.swing.JLabel();
         ClockCanvas1 = new com.mycompany.pomodoro.view.ClockCanvas();
-        instrucciones = new javax.swing.JLabel();
+        instructions = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,7 +37,7 @@ public class MainFrame extends javax.swing.JFrame implements IView{
         CustomPanel2.setColor2(new java.awt.Color(231, 37, 85));
         CustomPanel2.setTypeOfDegradation(3);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jmona\\OneDrive\\Documentos\\NetBeansProjects\\com.mycompany_Pomodoro_jar_1.0-SNAPSHOT\\src\\main\\java\\com\\mycompany\\pomodoro\\view\\images\\IconoDeReloj.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("src\\main\\java\\com\\mycompany\\pomodoro\\view\\images\\ClockIcon.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(220, 212, 212));
@@ -85,15 +82,15 @@ public class MainFrame extends javax.swing.JFrame implements IView{
                 .addContainerGap())
         );
 
-        labelDeReloj.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 100));
-        labelDeReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelDeReloj.setText("00:00:00");
+        labelOfClock.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 100));
+        labelOfClock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelOfClock.setText("00:00:00");
 
         ClockCanvas1.setBackground(PanelPrincipal.getColor2());
 
-        instrucciones.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        instrucciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        instrucciones.setText("Ingrese la duracion del pomodoro");
+        instructions.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        instructions.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        instructions.setText("Ingrese la duracion del pomodoro");
 
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
@@ -103,8 +100,8 @@ public class MainFrame extends javax.swing.JFrame implements IView{
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(instrucciones, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
-                    .addComponent(labelDeReloj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(instructions, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addComponent(labelOfClock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ClockCanvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 43, Short.MAX_VALUE))
         );
@@ -113,9 +110,9 @@ public class MainFrame extends javax.swing.JFrame implements IView{
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addComponent(CustomPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(instrucciones, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(instructions, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(labelDeReloj, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelOfClock, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(ClockCanvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 51, Short.MAX_VALUE))
@@ -141,7 +138,7 @@ public class MainFrame extends javax.swing.JFrame implements IView{
     
     @Override
     public JLabel getLabelClock(){
-        return labelDeReloj;
+        return labelOfClock;
     }
 
     @Override
@@ -159,12 +156,12 @@ public class MainFrame extends javax.swing.JFrame implements IView{
      */
     @Override
     public void setTextLabelReloj(String mensaje){
-        labelDeReloj.setText(mensaje);
+        labelOfClock.setText(mensaje);
     }
     
     @Override
     public void setTextInstrucciones(String mensaje){
-        instrucciones.setText(mensaje);
+        instructions.setText(mensaje);
     }
     
     @Override
@@ -198,14 +195,14 @@ public class MainFrame extends javax.swing.JFrame implements IView{
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.mycompany.pomodoro.view.componentes.CustomPanel PanelPrincipal;
+    private com.mycompany.pomodoro.view.components.CustomPanel PanelPrincipal;
     private com.mycompany.pomodoro.view.ClockCanvas ClockCanvas1;
-    private javax.swing.JLabel instrucciones;
+    private javax.swing.JLabel instructions;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel labelDeReloj;
-    private com.mycompany.pomodoro.view.componentes.CustomPanel CustomPanel2;
+    private javax.swing.JLabel labelOfClock;
+    private com.mycompany.pomodoro.view.components.CustomPanel CustomPanel2;
     // End of variables declaration//GEN-END:variables
     
 }

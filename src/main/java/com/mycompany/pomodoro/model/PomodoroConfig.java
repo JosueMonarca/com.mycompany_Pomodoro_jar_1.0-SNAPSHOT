@@ -24,7 +24,7 @@ public class PomodoroConfig {
         return pcs;
     }
 
-    public int getTrabajo() {
+    public int getJob() {
         return trabajo;
     }
 

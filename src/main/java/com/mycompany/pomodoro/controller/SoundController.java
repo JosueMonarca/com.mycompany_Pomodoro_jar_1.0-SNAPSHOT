@@ -1,14 +1,16 @@
 
 package com.mycompany.pomodoro.controller;
 
-import com.mycompany.pomodoro.Pomodoro;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import com.mycompany.pomodoro.Pomodoro;
 
 public class SoundController {
     public static void playFirstAlarm() throws LineUnavailableException{

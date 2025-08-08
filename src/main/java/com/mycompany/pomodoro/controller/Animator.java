@@ -4,13 +4,15 @@
  */
 package com.mycompany.pomodoro.controller;
 
-import com.mycompany.pomodoro.model.PomodoroConfig;
-import com.mycompany.pomodoro.view.ClockCanvas;
 import java.awt.event.ActionEvent;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+
+import com.mycompany.pomodoro.model.PomodoroConfig;
+import com.mycompany.pomodoro.view.ClockCanvas;
 
 /**
  *
@@ -18,48 +20,48 @@ import javax.swing.Timer;
  */
 public class Animator {
     private static ClockCanvas Canva ;
-    private static ClockController controlador ;
+    private static ClockController controller ;
     private static int pibote;
-    private static JLabel labelPrincipal ;
+    private static JLabel labelMain ;
     private static PomodoroConfig pcs;
-    private static Integer contador = 1;
+    private static Integer counter = 1;
     private static Timer timer;
-    private static Timer cuentaRegresiva;
+    private static Timer countdown;
     private static Timer listenerLabel;
     
-    public Animator(ClockCanvas Canva,ClockController controlador,JLabel labelPrincipal){
+    public Animator(ClockCanvas Canva,ClockController controller,JLabel labelMain){
         Animator.Canva = Canva;
-        Animator.controlador = controlador;
+        Animator.controller = controller;
         pibote = 0;
-        Animator.labelPrincipal = labelPrincipal;
+        Animator.labelMain = labelMain;
     }
     
     public void startCanvasAnimation(){
-        int[] tikAnterior = {0}; // fuera del Timer
+        int[] tikPrevious = {0}; // fuera del Timer
         pcs = PomodoroConfig.getInstance();
         
         timer = new Timer(10, (ActionEvent e) -> {
-            int distancia = controlador.getfirstPointX()-controlador.getPosicionX();
+            int distance = controller.getfirstPointX()-controller.getPosicionX();
             int tik = 0;
             
-            if (distancia != pibote){
-                if(distancia > 0){
-                    tik = distancia / Canva.getSpace();
-                    if(tik != tikAnterior[0] && tik > tikAnterior[0]){
+            if (distance != pibote){
+                if(distance > 0){
+                    tik = distance / Canva.getSpace();
+                    if(tik != tikPrevious[0] && tik > tikPrevious[0]){
                         Canva.animationLeft();
-                        if(pcs.getTrabajo() == 0 || pcs.getRest() == 0)ajustarTiempo(+1);
-                        else ajustarRepetitions(+1);
+                        if(pcs.getJob() == 0 || pcs.getRest() == 0)adjustTime(+1);
+                        else adjustRepetitions(+1);
                     }
-                    tikAnterior[0] = tik;
+                    tikPrevious[0] = tik;
                     
                 }else{
-                    tik = distancia / Canva.getSpace();
-                    if (tik != tikAnterior[0] && tik < tikAnterior[0]) {
+                    tik = distance / Canva.getSpace();
+                    if (tik != tikPrevious[0] && tik < tikPrevious[0]) {
                         Canva.animationRight();
-                        if(pcs.getTrabajo() == 0 || pcs.getRest() == 0)ajustarTiempo(-1);
-                        else ajustarRepetitions(-1);
+                        if(pcs.getJob() == 0 || pcs.getRest() == 0) adjustTime(-1);
+                        else adjustRepetitions(-1);
                     }
-                    tikAnterior[0] = tik;
+                    tikPrevious[0] = tik;
                 }
                 
             }
@@ -68,13 +70,13 @@ public class Animator {
                 
             }
             
-            pibote = distancia;
+            pibote = distance;
         });
         timer.start();
     } 
     
-    private static void ajustarTiempo(int secondsDelta) {
-        String time = labelPrincipal.getText();
+    private static void adjustTime(int secondsDelta) {
+        String time = labelMain.getText();
         String[] partes = time.split(":");
 
         int hours = Integer.parseInt(partes[0]);
@@ -95,14 +97,14 @@ public class Animator {
         minutes = (total % 3600) / 60;
         seconds = total % 60;
 
-        labelPrincipal.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+        labelMain.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
     }
     
-    private void ajustarRepetitions(int direccion){
-        if(contador > 0) contador = contador + direccion;
-        else{ JOptionPane.showMessageDialog(null, "No se puede repetir menos de 1 vez");contador = 1; }
+    private void adjustRepetitions(int direccion){
+        if(counter > 0) counter = counter + direccion;
+        else{ JOptionPane.showMessageDialog(null, "No se puede repetir menos de 1 vez");counter = 1; }
         
-        labelPrincipal.setText(String.format("%02d", contador));
+        labelMain.setText(String.format("%02d", counter));
     }
     
     public void stopAnimation() {
@@ -115,11 +117,11 @@ public class Animator {
         final String[] timeActual = { time };
         PomodoroConfig config = PomodoroConfig.getInstance();
         
-        if ((cuentaRegresiva != null && cuentaRegresiva.isRunning()) || config.getRepetitions() ==0) {
-            cuentaRegresiva.stop();
+        if ((countdown != null && countdown.isRunning()) || config.getRepetitions() ==0) {
+            countdown.stop();
         }
 
-        cuentaRegresiva = new Timer(1000, (ActionEvent action) -> {
+        countdown = new Timer(1000, (ActionEvent action) -> {
             String times = timeActual[0];
             String[] partes = times.split(":");
             int hours = Integer.parseInt(partes[0]);
@@ -131,23 +133,23 @@ public class Animator {
             seconds = total % 60;
             String pibote1 = hours +":"+minutes+":"+seconds;
             timeActual[0] = pibote1;
-            labelPrincipal.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+            labelMain.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
         });
-        cuentaRegresiva.start();
+        countdown.start();
     }
     
     public void handlePomodoros(){
         PomodoroConfig config = PomodoroConfig.getInstance();
         config.setRepetitions((config.getRepetitions() * 2)-1);
         boolean[] descanso = {false};
-        boolean[] yaDisparo = {false};
+        boolean[] alreadyShot = {false};
         
         if (listenerLabel != null && listenerLabel.isRunning()) {
             listenerLabel.stop();
         }                
         
         listenerLabel = new Timer(500 , (ActionEvent action) -> {
-            String times = labelPrincipal.getText();
+            String times = labelMain.getText();
             String[] partes = times.split(":");
             
             int hours = Integer.parseInt(partes[0]);
@@ -156,8 +158,8 @@ public class Animator {
             
             int total = hours * 3600 + minutes * 60 + seconds;
             
-            if(total == 0 && config.getRepetitions() != 0 && !yaDisparo[0]){
-                yaDisparo[0] = true;
+            if(total == 0 && config.getRepetitions() != 0 && !alreadyShot[0]){
+                alreadyShot[0] = true;
                 config.setRepetitions(config.getRepetitions()-1);
                 if(!descanso[0]){
                     descanso[0] = true;
@@ -184,7 +186,7 @@ public class Animator {
                 }else{
                     descanso[0] = false;
                     StringBuilder sb = new StringBuilder();
-                    int totalSeconds = config.getTrabajo();
+                    int totalSeconds = config.getJob();
                     
                     hours = totalSeconds / 3600;
                     sb.append(hours);
@@ -206,10 +208,10 @@ public class Animator {
                     }
                 }
             }
-            if(total > 0)  yaDisparo[0] = false;
+            if(total > 0)  alreadyShot[0] = false;
             if(config.getRepetitions() <=0){
                 listenerLabel.stop();
-                cuentaRegresiva.stop();
+                countdown.stop();
             }
         });
         listenerLabel.start();

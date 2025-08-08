@@ -43,8 +43,8 @@ public class ClockCanvas extends Canvas {
         space = (int)(this.getWidth()/array.length);
         
         for(int i = 0; i < array.length; i++){
-            int grosor = (i < 10)? ((i < 9) ? 1 + i / 3 : 4):(3 - ((i - 11) / 3));
-            g2.setStroke(new BasicStroke(grosor));
+            int thickness = (i < 10)? ((i < 9) ? 1 + i / 3 : 4):(3 - ((i - 11) / 3));
+            g2.setStroke(new BasicStroke(thickness));
             int x1 = i * space;
             int y1 = (int)(this.getHeight()*.75);
             int x2 = i * space;

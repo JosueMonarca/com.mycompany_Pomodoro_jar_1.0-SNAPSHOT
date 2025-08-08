@@ -4,8 +4,9 @@
  */
 package com.mycompany.pomodoro.controller.UserFlowController;
 
-import com.mycompany.pomodoro.model.PomodoroConfig;
 import java.util.function.Consumer;
+
+import com.mycompany.pomodoro.model.PomodoroConfig;
 
 /**
  *
@@ -26,7 +27,7 @@ public class StartCountDownView extends AbstractView {
         //Pomodoro.handlePomodoros();
         PomodoroConfig config = PomodoroConfig.getInstance();
         StringBuilder strBlr = new StringBuilder();
-        int tseconds = config.getTrabajo();
+        int tseconds = config.getJob();
         
         int hours = tseconds / 3600;
         strBlr.append(hours);
