@@ -33,7 +33,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="com.mycompany.pomodoro.view.componentes.NuevoJPanel" name="PanelPrincipal">
+    <Container class="com.mycompany.pomodoro.view.componentes.CustomPanel" name="PanelPrincipal">
       <Properties>
         <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="55" green="25" red="e7" type="rgb"/>
@@ -46,13 +46,13 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="nuevoJPanel2" alignment="0" max="32767" attributes="0"/>
+              <Component id="CustomPanel2" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="instrucciones" pref="528" max="32767" attributes="0"/>
                       <Component id="labelDeReloj" max="32767" attributes="0"/>
-                      <Component id="canvaDelReloj1" alignment="1" min="-2" pref="503" max="-2" attributes="0"/>
+                      <Component id="ClockCanvas1" alignment="1" min="-2" pref="503" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
               </Group>
@@ -61,20 +61,20 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="nuevoJPanel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="CustomPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="instrucciones" min="-2" pref="44" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="labelDeReloj" min="-2" pref="165" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="canvaDelReloj1" min="-2" pref="88" max="-2" attributes="0"/>
+                  <Component id="ClockCanvas1" min="-2" pref="88" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="com.mycompany.pomodoro.view.componentes.NuevoJPanel" name="nuevoJPanel2">
+        <Container class="com.mycompany.pomodoro.view.componentes.CustomPanel" name="CustomPanel2">
           <Properties>
             <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="55" green="25" red="e7" type="rgb"/>
@@ -177,9 +177,9 @@
             <Property name="text" type="java.lang.String" value="00:00:00"/>
           </Properties>
         </Component>
-        <Component class="com.mycompany.pomodoro.view.CanvaDelReloj" name="canvaDelReloj1">
+        <Component class="com.mycompany.pomodoro.view.ClockCanvas" name="ClockCanvas1">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="canvaDelReloj1.setBackground(PanelPrincipal.getColor2());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ClockCanvas1.setBackground(PanelPrincipal.getColor2());"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="instrucciones">

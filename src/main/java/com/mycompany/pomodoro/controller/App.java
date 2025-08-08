@@ -1,37 +1,37 @@
 
 package com.mycompany.pomodoro.controller;
 
-import com.mycompany.pomodoro.controller.ControladorFlujoVista.ControladorDeFlujoDeUsuario;
-import com.mycompany.pomodoro.view.CanvaDelReloj;
-import com.mycompany.pomodoro.view.FrameInicial;
+import com.mycompany.pomodoro.controller.UserFlowController.UserFlowController;
+import com.mycompany.pomodoro.view.ClockCanvas;
+import com.mycompany.pomodoro.view.MainFrame;
 import javax.swing.JLabel;
 
 public class App {
     
     public static void run() throws Exception{
         //Inicializar y acomadar el frame
-        FrameInicial frameDeInicio = new FrameInicial();
+        MainFrame frameDeInicio = new MainFrame();
         frameDeInicio.setVisible(true);
         frameDeInicio.setLocationRelativeTo(null);
         frameDeInicio.setResizable(false);
         
         // Obtener el canvas y vincularlo a su controlador
-        CanvaDelReloj canva = frameDeInicio.getCanvaDelReloj();
-        controladorReloj controlador = new controladorReloj(canva);
+        ClockCanvas canva = frameDeInicio.getClockCanvas();
+        ClockController controlador = new ClockController(canva);
         canva.addMouseListener(controlador);
         canva.addMouseMotionListener(controlador);
         
-        // Crear animador principal con canvas, controlador y label del tiempo
-        JLabel labelPrincipal = frameDeInicio.getLabelReloj();
-        Animador animador = new Animador(canva,controlador,labelPrincipal);
+        // Crear Animator principal con canvas, controlador y label del time
+        JLabel labelPrincipal = frameDeInicio.getLabelClock();
+        Animator Animator = new Animator(canva,controlador,labelPrincipal);
         
         
         // Configurar el flujo de pantallas y las acciones de usuario
-        ControladorDeFlujoDeUsuario controladorDeFlujo = new ControladorDeFlujoDeUsuario( frameDeInicio );
-        controladorDeFlujo.setAnimationPostCanva(tiempo -> animador.animationPostCanva(tiempo));
-        controladorDeFlujo.setControlarPomodoros(animador::controlarPomodoros);
-        controladorDeFlujo.setDetenerAnimacion(animador::detenerAnimacion);
+        UserFlowController controladorDeFlujo = new UserFlowController( frameDeInicio );
+        controladorDeFlujo.setAnimationPostCanva(time -> Animator.animationPostCanva(time));
+        controladorDeFlujo.sethandlePomodoros(Animator::handlePomodoros);
+        controladorDeFlujo.setstopAnimation(Animator::stopAnimation);
         frameDeInicio.setControlador(controladorDeFlujo);
-        animador.animationOfCanva();//<- Iniciar animaciones y ejecución principal
+        Animator.startCanvasAnimation();//<- Iniciar animaciones y ejecución principal
     }
 }

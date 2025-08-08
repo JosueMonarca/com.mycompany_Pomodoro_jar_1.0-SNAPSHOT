@@ -8,31 +8,31 @@ import java.awt.Paint;
 import java.awt.RadialGradientPaint;
 import java.awt.geom.Point2D;
 
-public class NuevoJPanel extends javax.swing.JPanel { 
+public class CustomPanel extends javax.swing.JPanel { 
 
     private Color color1 = new Color(177, 110, 178); 
     private Color color2 = new Color(143, 153, 232);
     private int typeOfDegradation = 1; // 1: vertical, 2: diagonal, 3: diagonal inversa
 	private int radio = 0;
 
-    public NuevoJPanel() {
+    public CustomPanel() {
         setOpaque(false); // Para que el degradado se dibuje bien
     }
 
-	public NuevoJPanel(Color color1, Color color2) {
+	public CustomPanel(Color color1, Color color2) {
 		this.color1 = color1; 
 		this.color2 = color2; 
 		setOpaque(false); // Para que el degradado se dibuje bien
 	}
 
-	public NuevoJPanel(Color color1, Color color2, int typeOfDegradation) {
+	public CustomPanel(Color color1, Color color2, int typeOfDegradation) {
 		this.color1 = color1; 
 		this.color2 = color2; 
 		this.typeOfDegradation = typeOfDegradation; 
 		setOpaque(false); // Para que el degradado se dibuje bien
 	}
 
-	public NuevoJPanel(Color color1, Color color2, int typeOfDegradation, int radio) {
+	public CustomPanel(Color color1, Color color2, int typeOfDegradation, int radio) {
 		this.color1 = color1;
 		this.color2 = color2;
 		this.typeOfDegradation = typeOfDegradation;
@@ -40,12 +40,12 @@ public class NuevoJPanel extends javax.swing.JPanel {
 		setOpaque(false); // Para que el degradado se dibuje bien
 	}
 
-	public NuevoJPanel(int radio){
+	public CustomPanel(int radio){
 		this.radio = radio;
 		setOpaque(false); // Para que el degradado se dibuje bien
 	}
 
-	public NuevoJPanel(int radio, int typeOfDegradation){
+	public CustomPanel(int radio, int typeOfDegradation){
 		this.radio = radio;
 		this.typeOfDegradation = typeOfDegradation;
 		setOpaque(false); // Para que el degradado se dibuje bien

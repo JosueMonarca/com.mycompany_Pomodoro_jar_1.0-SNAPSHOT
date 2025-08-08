@@ -7,47 +7,47 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class CanvaDelReloj extends Canvas {
+public class ClockCanvas extends Canvas {
     
     private int[] array;
-    private int espacio;
+    private int space;
     
-    public CanvaDelReloj(){
-        array = IniciarArray();
+    public ClockCanvas(){
+        array = StartArray();
     }
 
-    public int getEspacio() {
-        return espacio;
+    public int getSpace() {
+        return space;
     }
 
-    public void setEspacio(int espacio) {
-        this.espacio = espacio;
+    public void setSpace(int space) {
+        this.space = space;
     }
     
-    private int[] IniciarArray(){
-        int[] nuevoArray = new int[20];
+    private int[] StartArray(){
+        int[] newArray = new int[20];
         for( int i = 0; i < 20; i++){
-            nuevoArray[i] = (i % 5 == 0)? 40 : 20;
+            newArray[i] = (i % 5 == 0)? 40 : 20;
         }
-        return nuevoArray;
+        return newArray;
     }
     
-    public void setArrayOfTicks(int[] nuevoArray){
-        this.array = nuevoArray;
+    public void setArrayOfTicks(int[] newArray){
+        this.array = newArray;
     }
     
     @Override
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.WHITE);
-        espacio = (int)(this.getWidth()/array.length);
+        space = (int)(this.getWidth()/array.length);
         
         for(int i = 0; i < array.length; i++){
             int grosor = (i < 10)? ((i < 9) ? 1 + i / 3 : 4):(3 - ((i - 11) / 3));
             g2.setStroke(new BasicStroke(grosor));
-            int x1 = i * espacio;
+            int x1 = i * space;
             int y1 = (int)(this.getHeight()*.75);
-            int x2 = i * espacio;
+            int x2 = i * space;
             int y2 = (int)(this.getHeight()*.75) - array[i];
             g2.drawLine(x1,y1,x2,y2);
         }

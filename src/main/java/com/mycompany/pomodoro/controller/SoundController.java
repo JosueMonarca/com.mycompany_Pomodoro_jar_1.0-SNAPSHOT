@@ -10,8 +10,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class ControladorDeSonidos {
-    public static void reproducirPrimeraAlarma() throws LineUnavailableException{
+public class SoundController {
+    public static void playFirstAlarm() throws LineUnavailableException{
         try{
             URL soundURL = Pomodoro.class.getResource("/alarma1.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);

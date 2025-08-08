@@ -1,4 +1,3 @@
-
 package com.mycompany.pomodoro;
 
 import com.mycompany.pomodoro.controller.App;

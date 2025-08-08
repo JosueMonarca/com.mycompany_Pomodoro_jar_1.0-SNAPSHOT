@@ -23,26 +23,26 @@ src/
             Pomodoro.java                # Main entry point
             controller/
               App.java                   # Application bootstrap
-              Animador.java              # Animation and timer logic
-              ControladorDeSonidos.java  # Sound controller
-              controladorReloj.java      # Clock controller
-              IVista.java                # View interface
-              ControladorFlujoVista/
-                ControladorDeFlujoDeUsuario.java # User flow controller (state machine)
-                EstadoPomodoro.java      # Pomodoro state enum
-                AbstractVista.java       # Abstract view logic
-                VistaDeTiempoDeTrabajo.java
-                VistaDeTiempoDeDescanso.java
-                VistaDeNumeroDePomodoros.java
+              Animator.java              # Animation and timer logic
+              SoundController.java  # Sound controller
+              ClockController.java      # Clock controller
+              IView.java                # View interface
+              UserFlowController/
+                UserFlowController.java # User flow controller (state machine)
+                pomodoroState.java      # Pomodoro state enum
+                AbstractView.java       # Abstract view logic
+                WorkTimeView.java
+                BreakTimeView.java
+                PomodoroCountView.java
                 IniciarConteoRegresivo.java
-                SaltarPomodoro.java
+                SkipPomodoroView.java
             model/
-              PomodoConfigSingle.java    # Singleton for Pomodoro configuration
+              PomodoroConfig.java    # Singleton for Pomodoro configuration
             view/
-              FrameInicial.java          # Main window
-              CanvaDelReloj.java         # Custom clock canvas
+              MainFrame.java          # Main window
+              ClockCanvas.java         # Custom clock canvas
               componentes/
-                NuevoJPanel.java         # Custom gradient panel
+                CustomPanel.java         # Custom gradient panel
               icons/
               images/
     resources/
