@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.pomodoro.controller;
 
 import java.awt.event.ActionEvent;
@@ -14,10 +11,7 @@ import javax.swing.Timer;
 import com.mycompany.pomodoro.model.PomodoroConfig;
 import com.mycompany.pomodoro.view.ClockCanvas;
 
-/**
- *
- * @author jmona
- */
+
 public class Animator {
     private static ClockCanvas Canva ;
     private static ClockController controller ;
