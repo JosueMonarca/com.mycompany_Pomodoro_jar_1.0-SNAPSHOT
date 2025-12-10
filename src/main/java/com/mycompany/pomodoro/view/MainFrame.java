@@ -9,14 +9,15 @@ import javax.swing.JOptionPane;
 
 import com.mycompany.pomodoro.controller.UserFlowController.UserFlowController;
 
-public class MainFrame extends javax.swing.JFrame implements IView{
+public class MainFrame extends javax.swing.JFrame implements IView {
 
     public MainFrame() {
         initComponents();
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         PanelPrincipal = new com.mycompany.pomodoro.view.components.CustomPanel();
@@ -35,9 +36,10 @@ public class MainFrame extends javax.swing.JFrame implements IView{
 
         CustomPanel2.setColor1(new java.awt.Color(231, 37, 85));
         CustomPanel2.setColor2(new java.awt.Color(231, 37, 85));
-        CustomPanel2.setTypeOfDegradation(3);
+        CustomPanel2.setgradientType(3);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("src\\main\\java\\com\\mycompany\\pomodoro\\view\\images\\ClockIcon.png")); // NOI18N
+        jLabel1.setIcon(
+                new javax.swing.ImageIcon("src\\main\\java\\com\\mycompany\\pomodoro\\view\\images\\ClockIcon.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(220, 212, 212));
@@ -58,29 +60,35 @@ public class MainFrame extends javax.swing.JFrame implements IView{
         javax.swing.GroupLayout CustomPanel2Layout = new javax.swing.GroupLayout(CustomPanel2);
         CustomPanel2.setLayout(CustomPanel2Layout);
         CustomPanel2Layout.setHorizontalGroup(
-            CustomPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CustomPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+                CustomPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(CustomPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 194,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 216,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()));
         CustomPanel2Layout.setVerticalGroup(
-            CustomPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CustomPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(CustomPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(CustomPanel2Layout.createSequentialGroup()
-                        .addGroup(CustomPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+                CustomPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(CustomPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(CustomPanel2Layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(CustomPanel2Layout.createSequentialGroup()
+                                                .addGroup(CustomPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap()));
 
         labelOfClock.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 100));
         labelOfClock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -95,105 +103,107 @@ public class MainFrame extends javax.swing.JFrame implements IView{
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
         PanelPrincipalLayout.setHorizontalGroup(
-            PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CustomPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(instructions, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
-                    .addComponent(labelOfClock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ClockCanvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 43, Short.MAX_VALUE))
-        );
+                PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(CustomPanel2, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addGroup(PanelPrincipalLayout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(instructions, javax.swing.GroupLayout.DEFAULT_SIZE, 528,
+                                                Short.MAX_VALUE)
+                                        .addComponent(labelOfClock, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ClockCanvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 503,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 43, Short.MAX_VALUE)));
         PanelPrincipalLayout.setVerticalGroup(
-            PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                .addComponent(CustomPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(instructions, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(labelOfClock, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(ClockCanvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 51, Short.MAX_VALUE))
-        );
+                PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                                .addComponent(CustomPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(instructions, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(labelOfClock, javax.swing.GroupLayout.PREFERRED_SIZE, 165,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addComponent(ClockCanvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 88,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 51, Short.MAX_VALUE)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public ClockCanvas getClockCanvas(){
+    public ClockCanvas getClockCanvas() {
         return ClockCanvas1;
     }
-    
+
     @Override
-    public JLabel getLabelClock(){
+    public JLabel getLabelClock() {
         return labelOfClock;
     }
 
     @Override
-    public JButton getButtonPrincipal(){
+    public JButton getButtonPrincipal() {
         return jButton1;
     }
 
     public void setControlador(UserFlowController controller) {
         jButton1.addActionListener(e -> controller.next());
     }
-    
-    /**
-     *
-     * @param mensaje
-     */
+
     @Override
-    public void setTextLabelReloj(String mensaje){
+    public void setTextLabelReloj(String mensaje) {
         labelOfClock.setText(mensaje);
     }
-    
+
     @Override
-    public void setTextInstrucciones(String mensaje){
+    public void setTextInstrucciones(String mensaje) {
         instructions.setText(mensaje);
     }
-    
+
     @Override
-    public void setTextJOptionPane(String mensaje){
+    public void setTextJOptionPane(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
 
     @Override
     public int showMensajeOfConfirm(String mensaje) {
-        return  JOptionPane.showConfirmDialog(
-                null, 
-                mensaje, 
+        return JOptionPane.showConfirmDialog(
+                null,
+                mensaje,
                 "Confirmación",
-                JOptionPane.YES_NO_CANCEL_OPTION
-            );   
+                JOptionPane.YES_NO_CANCEL_OPTION);
     }
-    
+
     @Override
-    public void setTextButtonPrincipal(String text){
+    public void setTextButtonPrincipal(String text) {
         jButton1.setText(text);
     }
-    
+
     @Override
     public void hideCanva() {
         ClockCanvas1.setVisible(false);
     }
-    
+
     @Override
-    public void hideButton(){
+    public void hideButton() {
         jButton1.setEnabled(false);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.mycompany.pomodoro.view.components.CustomPanel PanelPrincipal;
     private com.mycompany.pomodoro.view.ClockCanvas ClockCanvas1;
@@ -204,5 +214,10 @@ public class MainFrame extends javax.swing.JFrame implements IView{
     private javax.swing.JLabel labelOfClock;
     private com.mycompany.pomodoro.view.components.CustomPanel CustomPanel2;
     // End of variables declaration//GEN-END:variables
-    
+
+    @Override
+    public void showText(String text) {
+
+    }
+
 }

@@ -1,43 +1,39 @@
 
 package com.mycompany.pomodoro.model;
 
-/**
- *
- * @author jmona
- */
 public class PomodoroConfig {
-    private static PomodoroConfig pcs;
-    private int trabajo;
-    private int descanso;
+    private static PomodoroConfig instance;
+    private int workTime;
+    private int breakTime;
     private int repetitions;
     
     private PomodoroConfig(){
-        this.trabajo = 0;
-        this.descanso = 0;
+        this.workTime = 0;
+        this.breakTime = 0;
         this.repetitions = 0;
     }
     
     public static PomodoroConfig getInstance(){
-        if(pcs == null){
-            pcs = new PomodoroConfig();
+        if(instance == null){
+            instance = new PomodoroConfig();
         }
-        return pcs;
+        return instance;
     }
 
     public int getJob() {
-        return trabajo;
+        return workTime;
     }
 
-    public void setTrabajo(int trabajo) {
-        this.trabajo = trabajo;
+    public void setJob(int trabajo) {
+        this.workTime = trabajo;
     }
 
-    public int getRest() {
-        return descanso;
+    public int getBreaktime() {
+        return breakTime;
     }
 
     public void setRest(int descanso) {
-        this.descanso = descanso;
+        this.breakTime = descanso;
     }
 
     public int getRepetitions() {
@@ -47,5 +43,4 @@ public class PomodoroConfig {
     public void setRepetitions(int repetitions) {
         this.repetitions = repetitions;
     }
-    
 }

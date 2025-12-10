@@ -25,7 +25,7 @@ public class BreakTimeView extends AbstractView{
         int total = seconds + minutes + hours;
         config.setRest(total);
         
-        if(config.getRest() != 0){
+        if(config.getBreaktime() != 0){
             view.setTextLabelReloj("00");
             view.setTextInstrucciones("Ingrese el numero de pomodoros a realizar");
             return true;

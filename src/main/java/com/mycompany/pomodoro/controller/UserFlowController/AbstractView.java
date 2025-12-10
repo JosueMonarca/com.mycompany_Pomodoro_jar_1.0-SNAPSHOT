@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.pomodoro.controller.UserFlowController;
 
 import com.mycompany.pomodoro.view.IView;
 
-/**
- *
- * @author jmona
- */
 public abstract class AbstractView {
     protected IView view;
     

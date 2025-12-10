@@ -1,17 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.pomodoro.controller.UserFlowController;
 
 import java.util.function.Consumer;
 
 import com.mycompany.pomodoro.model.PomodoroConfig;
 
-/**
- *
- * @author jmona
- */
 public class StartCountDownView extends AbstractView {
 
     private final Consumer<String> animationPostCanva;

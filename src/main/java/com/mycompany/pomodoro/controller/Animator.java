@@ -43,7 +43,7 @@ public class Animator {
                     tik = distance / Canva.getSpace();
                     if(tik != tikPrevious[0] && tik > tikPrevious[0]){
                         Canva.animationLeft();
-                        if(pcs.getJob() == 0 || pcs.getRest() == 0)adjustTime(+1);
+                        if(pcs.getJob() == 0 || pcs.getBreaktime() == 0)adjustTime(+1);
                         else adjustRepetitions(+1);
                     }
                     tikPrevious[0] = tik;
@@ -52,7 +52,7 @@ public class Animator {
                     tik = distance / Canva.getSpace();
                     if (tik != tikPrevious[0] && tik < tikPrevious[0]) {
                         Canva.animationRight();
-                        if(pcs.getJob() == 0 || pcs.getRest() == 0) adjustTime(-1);
+                        if(pcs.getJob() == 0 || pcs.getBreaktime() == 0) adjustTime(-1);
                         else adjustRepetitions(-1);
                     }
                     tikPrevious[0] = tik;
@@ -60,7 +60,7 @@ public class Animator {
                 
             }
             
-            if(pcs.getRest() != 0){
+            if(pcs.getBreaktime() != 0){
                 
             }
             
@@ -158,7 +158,7 @@ public class Animator {
                 if(!descanso[0]){
                     descanso[0] = true;
                     StringBuilder sb = new StringBuilder();
-                    int totalSeconds = config.getRest();
+                    int totalSeconds = config.getBreaktime();
                     
                     hours = totalSeconds / 3600;
                     sb.append(hours);

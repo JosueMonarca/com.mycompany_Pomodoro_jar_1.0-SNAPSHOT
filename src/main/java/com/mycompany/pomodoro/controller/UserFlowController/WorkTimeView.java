@@ -20,7 +20,7 @@ public class WorkTimeView extends AbstractView {
         minutes = minutes * 60;
         int total = seconds+minutes+hours;
         PomodoroConfig config = PomodoroConfig.getInstance();
-        config.setTrabajo(total);
+        config.setJob(total);
         
         if(config.getJob() != 0){
             view.setTextLabelReloj("00:00:00");
