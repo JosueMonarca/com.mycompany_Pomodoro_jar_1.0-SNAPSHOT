@@ -11,48 +11,47 @@ import javax.swing.Timer;
 import com.mycompany.pomodoro.model.PomodoroConfig;
 import com.mycompany.pomodoro.view.ClockCanvas;
 
-
 public class Animator {
-    private static ClockCanvas Canva ;
+    private static ClockCanvas canva ;
     private static ClockController controller ;
-    private static int pibote;
+    private static int lastDistance;
     private static JLabel labelMain ;
-    private static PomodoroConfig pcs;
+    private static PomodoroConfig instanceOfModel;
     private static Integer counter = 1;
     private static Timer timer;
     private static Timer countdown;
     private static Timer listenerLabel;
     
     public Animator(ClockCanvas Canva,ClockController controller,JLabel labelMain){
-        Animator.Canva = Canva;
+        Animator.canva = Canva;
         Animator.controller = controller;
-        pibote = 0;
+        lastDistance = 0;
         Animator.labelMain = labelMain;
     }
     
     public void startCanvasAnimation(){
         int[] tikPrevious = {0}; // fuera del Timer
-        pcs = PomodoroConfig.getInstance();
+        instanceOfModel = PomodoroConfig.getInstance();
         
         timer = new Timer(10, (ActionEvent e) -> {
             int distance = controller.getfirstPointX()-controller.getPosicionX();
             int tik = 0;
             
-            if (distance != pibote){
+            if (distance != lastDistance){
                 if(distance > 0){
-                    tik = distance / Canva.getSpace();
+                    tik = distance / canva.getSpace();
                     if(tik != tikPrevious[0] && tik > tikPrevious[0]){
-                        Canva.animationLeft();
-                        if(pcs.getJob() == 0 || pcs.getBreaktime() == 0)adjustTime(+1);
+                        canva.animationLeft();
+                        if(instanceOfModel.getJob() == 0 || instanceOfModel.getBreaktime() == 0)adjustTime(+1);
                         else adjustRepetitions(+1);
                     }
                     tikPrevious[0] = tik;
                     
                 }else{
-                    tik = distance / Canva.getSpace();
+                    tik = distance / canva.getSpace();
                     if (tik != tikPrevious[0] && tik < tikPrevious[0]) {
-                        Canva.animationRight();
-                        if(pcs.getJob() == 0 || pcs.getBreaktime() == 0) adjustTime(-1);
+                        canva.animationRight();
+                        if(instanceOfModel.getJob() == 0 || instanceOfModel.getBreaktime() == 0) adjustTime(-1);
                         else adjustRepetitions(-1);
                     }
                     tikPrevious[0] = tik;
@@ -60,11 +59,11 @@ public class Animator {
                 
             }
             
-            if(pcs.getBreaktime() != 0){
+            if(instanceOfModel.getBreaktime() != 0){
                 
             }
             
-            pibote = distance;
+            lastDistance = distance;
         });
         timer.start();
     } 
