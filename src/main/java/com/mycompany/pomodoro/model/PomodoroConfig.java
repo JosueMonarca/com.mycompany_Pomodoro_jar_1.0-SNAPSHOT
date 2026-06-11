@@ -23,8 +23,8 @@ public class PomodoroConfig {
         return workTime;
     }
 
-    public void setJob(int trabajo) {
-        this.workTime = trabajo;
+    public void setJob(int work) {
+        this.workTime = work;
     }
 
     public int getBreaktime() {

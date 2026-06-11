@@ -12,7 +12,7 @@ import com.mycompany.pomodoro.model.PomodoroConfig;
 import com.mycompany.pomodoro.view.ClockCanvas;
 
 public class Animator {
-    private static ClockCanvas canva ;
+    private final  ClockCanvas CANVA ;
     private static ClockController controller ;
     private static int lastDistance;
     private static JLabel labelMain ;
@@ -23,7 +23,7 @@ public class Animator {
     private static Timer listenerLabel;
     
     public Animator(ClockCanvas Canva,ClockController controller,JLabel labelMain){
-        Animator.canva = Canva;
+        CANVA = Canva;
         Animator.controller = controller;
         lastDistance = 0;
         Animator.labelMain = labelMain;
@@ -39,18 +39,18 @@ public class Animator {
             
             if (distance != lastDistance){
                 if(distance > 0){
-                    tik = distance / canva.getSpace();
+                    tik = distance / CANVA.getSpace();
                     if(tik != tikPrevious[0] && tik > tikPrevious[0]){
-                        canva.animationLeft();
+                        CANVA.animationLeft();
                         if(instanceOfModel.getJob() == 0 || instanceOfModel.getBreaktime() == 0)adjustTime(+1);
                         else adjustRepetitions(+1);
                     }
                     tikPrevious[0] = tik;
                     
                 }else{
-                    tik = distance / canva.getSpace();
+                    tik = distance / CANVA.getSpace();
                     if (tik != tikPrevious[0] && tik < tikPrevious[0]) {
-                        canva.animationRight();
+                        CANVA.animationRight();
                         if(instanceOfModel.getJob() == 0 || instanceOfModel.getBreaktime() == 0) adjustTime(-1);
                         else adjustRepetitions(-1);
                     }
