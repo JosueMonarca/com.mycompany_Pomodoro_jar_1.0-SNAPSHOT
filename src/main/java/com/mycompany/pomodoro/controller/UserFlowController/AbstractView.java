@@ -1,10 +1,12 @@
 
 package com.mycompany.pomodoro.controller.UserFlowController;
 
+import com.mycompany.pomodoro.view.ITimeDisplay;
 import com.mycompany.pomodoro.view.IView;
 
 public abstract class AbstractView {
     protected IView view;
+    protected ITimeDisplay td;
     
     protected String startCanvasAnimation(int totalSeconds) {
         int hours = totalSeconds / 3600;

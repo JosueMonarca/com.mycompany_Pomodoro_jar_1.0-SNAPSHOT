@@ -26,11 +26,11 @@ public class App {
         Animator animator = new Animator(canva,controller,labelMain);
         
         // Configurar el flujo de pantallas y las acciones de usuario
-        UserFlowController controllerDeFlujo = new UserFlowController( mainFrame );
-        controllerDeFlujo.setAnimationPostCanva(time -> animator.animationPostCanva(time));
-        controllerDeFlujo.sethandlePomodoros(animator::handlePomodoros);
-        controllerDeFlujo.setstopAnimation(animator::stopAnimation);
-        mainFrame.setControlador(controllerDeFlujo);
+        UserFlowController flowController = new UserFlowController( mainFrame, mainFrame );
+        flowController.setAnimationPostCanva(time -> animator.animationPostCanva(time));
+        flowController.sethandlePomodoros(animator::handlePomodoros);
+        flowController.setstopAnimation(animator::stopAnimation);
+        mainFrame.setControlador(flowController);
         animator.startCanvasAnimation();//<- Iniciar animaciones y ejecución principal
     }
 }

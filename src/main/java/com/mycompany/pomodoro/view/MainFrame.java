@@ -6,10 +6,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import com.mycompany.pomodoro.view.ITimeDisplay;
 
 import com.mycompany.pomodoro.controller.UserFlowController.UserFlowController;
 
-public class MainFrame extends javax.swing.JFrame implements IView {
+public class MainFrame extends javax.swing.JFrame implements IView, ITimeDisplay{
 
     public MainFrame() {
         initComponents();
@@ -166,11 +167,6 @@ public class MainFrame extends javax.swing.JFrame implements IView {
     }
 
     @Override
-    public void setTextLabelReloj(String mensaje) {
-        labelOfClock.setText(mensaje);
-    }
-
-    @Override
     public void setTextInstrucciones(String mensaje) {
         instructions.setText(mensaje);
     }
@@ -203,6 +199,7 @@ public class MainFrame extends javax.swing.JFrame implements IView {
     public void hideButton() {
         jButton1.setEnabled(false);
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.mycompany.pomodoro.view.components.CustomPanel PanelPrincipal;
@@ -218,6 +215,11 @@ public class MainFrame extends javax.swing.JFrame implements IView {
     @Override
     public void showText(String text) {
 
+    }
+
+    @Override
+    public void updateTime(String formattedTime) {
+        labelOfClock.setText(formattedTime);
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 
 import com.mycompany.pomodoro.model.PomodoroConfig;
+import com.mycompany.pomodoro.view.ITimeDisplay;
 import com.mycompany.pomodoro.view.IView;
 
 public class SkipPomodoroView extends AbstractView {
@@ -14,11 +15,12 @@ public class SkipPomodoroView extends AbstractView {
     private final Consumer<String> animationPostCanva;
     private final Runnable handlePomodoros;
     
-    public SkipPomodoroView (Runnable stopAnimation,Consumer<String> animationPostCanva,Runnable handlePomodoros,IView viewFrame){
+    public SkipPomodoroView (Runnable stopAnimation,Consumer<String> animationPostCanva,Runnable handlePomodoros,IView viewFrame, ITimeDisplay td){
         this.stopAnimation = stopAnimation;
         this.animationPostCanva = animationPostCanva;
         this.handlePomodoros = handlePomodoros;
         this.view = viewFrame;
+        this.td = td;
     }
 
     @Override
@@ -74,7 +76,7 @@ public class SkipPomodoroView extends AbstractView {
         } else {
             // Ya no quedan más pomodoros → Terminar ciclo
             view.setTextJOptionPane("Todos los pomodoros han terminado.");
-            view.setTextLabelReloj("00:00:00");
+            td.updateTime("00:00:00");
             view.setTextInstrucciones("Has terminado");
             view.hideButton();
         }

@@ -2,14 +2,16 @@
 package com.mycompany.pomodoro.controller.UserFlowController;
 
 import com.mycompany.pomodoro.model.PomodoroConfig;
+import com.mycompany.pomodoro.view.ITimeDisplay;
 import com.mycompany.pomodoro.view.IView;
 
 public class PomodoroCountView extends AbstractView {
     private final Runnable stopAnimation;
     
-    public PomodoroCountView(IView view,Runnable stopAnimation){
+    public PomodoroCountView(IView view,Runnable stopAnimation,ITimeDisplay td){
         this.view = view;
         this.stopAnimation = stopAnimation;
+        this.td = td;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class PomodoroCountView extends AbstractView {
         if(config.getRepetitions() != 0){ 
             view.setTextInstrucciones("");
             view.setTextButtonPrincipal("Iniciar");
-            view.setTextLabelReloj(sb.toString());
+            td.updateTime(sb.toString());
             view.hideCanva();
             //Pomodoro.stopAnimation();
             stopAnimation.run();
@@ -42,6 +44,5 @@ public class PomodoroCountView extends AbstractView {
             view.setTextJOptionPane("Por favor ingrese un numero de veces valido es mayor de 0");
             return false;
         }  
-    }
-    
+    }   
 }

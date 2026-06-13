@@ -7,7 +7,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-
 import com.mycompany.pomodoro.model.PomodoroConfig;
 import com.mycompany.pomodoro.view.ClockCanvas;
 
@@ -70,11 +69,11 @@ public class Animator {
     
     private static void adjustTime(int secondsDelta) {
         String time = labelMain.getText();
-        String[] partes = time.split(":");
+        String[] parts = time.split(":");
 
-        int hours = Integer.parseInt(partes[0]);
-        int minutes = Integer.parseInt(partes[1]);
-        int seconds = Integer.parseInt(partes[2]);
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+        int seconds = Integer.parseInt(parts[2]);
 
         int total = hours * 3600 + minutes * 60 + seconds + secondsDelta*10;
 
@@ -107,7 +106,7 @@ public class Animator {
     }
     
     public void animationPostCanva(String time){
-        final String[] timeActual = { time };
+        final String[] currentTime = { time };
         PomodoroConfig config = PomodoroConfig.getInstance();
         
         if ((countdown != null && countdown.isRunning()) || config.getRepetitions() ==0) {
@@ -115,7 +114,7 @@ public class Animator {
         }
 
         countdown = new Timer(1000, (ActionEvent action) -> {
-            String times = timeActual[0];
+            String times = currentTime[0];
             String[] partes = times.split(":");
             int hours = Integer.parseInt(partes[0]);
             int minutes = Integer.parseInt(partes[1]);
@@ -125,7 +124,7 @@ public class Animator {
             minutes = (total % 3600) / 60;
             seconds = total % 60;
             String pibote1 = hours +":"+minutes+":"+seconds;
-            timeActual[0] = pibote1;
+            currentTime[0] = pibote1;
             labelMain.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
         });
         countdown.start();

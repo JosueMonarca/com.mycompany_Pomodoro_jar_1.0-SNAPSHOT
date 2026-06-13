@@ -2,6 +2,7 @@
 package com.mycompany.pomodoro.controller.UserFlowController;
 
 import com.mycompany.pomodoro.model.PomodoroConfig;
+import com.mycompany.pomodoro.view.ITimeDisplay;
 import com.mycompany.pomodoro.view.IView;
 /**
  *
@@ -9,8 +10,9 @@ import com.mycompany.pomodoro.view.IView;
  */
 public class BreakTimeView extends AbstractView{
 
-    public BreakTimeView(IView view){
+    public BreakTimeView(IView view,ITimeDisplay td){
         this.view = view;
+        this.td = td;
     }
     @Override
     public boolean changeView() {
@@ -26,13 +28,12 @@ public class BreakTimeView extends AbstractView{
         config.setRest(total);
         
         if(config.getBreaktime() != 0){
-            view.setTextLabelReloj("00");
+            td.updateTime("00");
             view.setTextInstrucciones("Ingrese el numero de pomodoros a realizar");
             return true;
         }else{
             view.setTextJOptionPane("Por favor ingrese un numero valido");
             return false;
         }
-    }
-    
+    }   
 }

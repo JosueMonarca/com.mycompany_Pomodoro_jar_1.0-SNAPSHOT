@@ -7,7 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class ClockCanvas extends Canvas {
+public class ClockCanvas extends Canvas implements ICrown{
     
     private int[] tickHeights;
     private int space;
@@ -16,10 +16,12 @@ public class ClockCanvas extends Canvas {
         tickHeights = initTicks();
     }
 
+    @Override
     public int getSpace() {
         return space;
     }
 
+    @Override
     public void setSpace(int space) {
         this.space = space;
     }
@@ -53,6 +55,7 @@ public class ClockCanvas extends Canvas {
         }
     }
     
+    @Override
     public void animationLeft(){
         for(int i = 0; i < tickHeights.length; i++ ){
             if(tickHeights[i] == 40 && i != 0){
@@ -68,6 +71,7 @@ public class ClockCanvas extends Canvas {
         repaint();
     }
     
+    @Override
     public void animationRight(){
         for (int i = tickHeights.length - 1; i >= 0; i-- ){
             if (tickHeights[i] == 40 && i != tickHeights.length - 1) {

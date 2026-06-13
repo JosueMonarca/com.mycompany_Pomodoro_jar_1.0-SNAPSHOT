@@ -1,12 +1,14 @@
 package com.mycompany.pomodoro.controller.UserFlowController;
 
 import com.mycompany.pomodoro.model.PomodoroConfig;
+import com.mycompany.pomodoro.view.ITimeDisplay;
 import com.mycompany.pomodoro.view.IView;
 
 public class WorkTimeView extends AbstractView {
     
-    public WorkTimeView(IView view){
+    public WorkTimeView(IView view, ITimeDisplay td){
         this.view = view;
+        this.td = td;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class WorkTimeView extends AbstractView {
         config.setJob(total);
         
         if(config.getJob() != 0){
-            view.setTextLabelReloj("00:00:00");
+            td.updateTime("00:00:00");
             view.setTextInstrucciones("Ingrese el tiempo de descanso");
             return true;
         }else{
