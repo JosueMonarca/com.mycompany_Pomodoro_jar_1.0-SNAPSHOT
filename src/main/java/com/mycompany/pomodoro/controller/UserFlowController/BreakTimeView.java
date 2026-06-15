@@ -25,7 +25,7 @@ public class BreakTimeView extends AbstractView{
         hours = hours * 3600;
         minutes = minutes * 60;
         int total = seconds + minutes + hours;
-        config.setRest(total);
+        config.setBreakTime(total);
         
         if(config.getBreaktime() != 0){
             td.updateTime("00");

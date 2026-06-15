@@ -22,9 +22,9 @@ public class WorkTimeView extends AbstractView {
         minutes = minutes * 60;
         int total = seconds+minutes+hours;
         PomodoroConfig config = PomodoroConfig.getInstance();
-        config.setJob(total);
+        config.setWorkTime(total);
         
-        if(config.getJob() != 0){
+        if(config.getWorkTime() != 0){
             td.updateTime("00:00:00");
             view.setTextInstrucciones("Ingrese el tiempo de descanso");
             return true;

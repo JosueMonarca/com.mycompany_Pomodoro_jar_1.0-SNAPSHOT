@@ -20,7 +20,7 @@ public class StartCountDownView extends AbstractView {
         //Pomodoro.handlePomodoros();
         PomodoroConfig config = PomodoroConfig.getInstance();
         StringBuilder strBlr = new StringBuilder();
-        int tseconds = config.getJob();
+        int tseconds = config.getWorkTime();
         
         int hours = tseconds / 3600;
         strBlr.append(hours);

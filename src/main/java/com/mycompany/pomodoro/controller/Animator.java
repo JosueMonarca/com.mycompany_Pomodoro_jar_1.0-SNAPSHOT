@@ -33,7 +33,7 @@ public class Animator {
         instanceOfModel = PomodoroConfig.getInstance();
         
         timer = new Timer(10, (ActionEvent e) -> {
-            int distance = controller.getfirstPointX()-controller.getPosicionX();
+            int distance = controller.getfirstPointX() - controller.getPosicionX();
             int tik = 0;
             
             if (distance != lastDistance){
@@ -41,7 +41,7 @@ public class Animator {
                     tik = distance / CANVA.getSpace();
                     if(tik != tikPrevious[0] && tik > tikPrevious[0]){
                         CANVA.animationLeft();
-                        if(instanceOfModel.getJob() == 0 || instanceOfModel.getBreaktime() == 0)adjustTime(+1);
+                        if(instanceOfModel.getWorkTime() == 0 || instanceOfModel.getBreaktime() == 0)adjustTime(+1);
                         else adjustRepetitions(+1);
                     }
                     tikPrevious[0] = tik;
@@ -50,7 +50,7 @@ public class Animator {
                     tik = distance / CANVA.getSpace();
                     if (tik != tikPrevious[0] && tik < tikPrevious[0]) {
                         CANVA.animationRight();
-                        if(instanceOfModel.getJob() == 0 || instanceOfModel.getBreaktime() == 0) adjustTime(-1);
+                        if(instanceOfModel.getWorkTime() == 0 || instanceOfModel.getBreaktime() == 0) adjustTime(-1);
                         else adjustRepetitions(-1);
                     }
                     tikPrevious[0] = tik;
@@ -67,7 +67,7 @@ public class Animator {
         timer.start();
     } 
     
-    private static void adjustTime(int secondsDelta) {
+    private  void adjustTime(int secondsDelta) {
         String time = labelMain.getText();
         String[] parts = time.split(":");
 
@@ -81,20 +81,24 @@ public class Animator {
             JOptionPane.showMessageDialog(null, "No se puede poner un pomodoro mayor a un día");
             total = 86400;
         } else if (total <= 0) {
-            JOptionPane.showMessageDialog(null, "No se puede poner un pomodoro de 0");
             total = 0;
         }
 
         hours = total / 3600;
         minutes = (total % 3600) / 60;
         seconds = total % 60;
+        
+        PomodoroConfig config = PomodoroConfig.getInstance();
+        config.setTimeKeeper(total);
 
         labelMain.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
     }
     
     private void adjustRepetitions(int direccion){
         if(counter > 0) counter = counter + direccion;
-        else{ JOptionPane.showMessageDialog(null, "No se puede repetir menos de 1 vez");counter = 1; }
+        else counter = 1; 
+        PomodoroConfig config = PomodoroConfig.getInstance();
+        config.setTimeKeeper(counter);
         
         labelMain.setText(String.format("%02d", counter));
     }
@@ -178,7 +182,7 @@ public class Animator {
                 }else{
                     descanso[0] = false;
                     StringBuilder sb = new StringBuilder();
-                    int totalSeconds = config.getJob();
+                    int totalSeconds = config.getWorkTime();
                     
                     hours = totalSeconds / 3600;
                     sb.append(hours);

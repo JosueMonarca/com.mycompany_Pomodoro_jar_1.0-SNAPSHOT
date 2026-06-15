@@ -63,7 +63,7 @@ public class SkipPomodoroView extends AbstractView {
             config.setRepetitions(repetitions - 1);
 
             // Iniciar siguiente descanso o pomodoro
-            int time = config.getJob(); // O config.getBreaktime() si estás en descanso
+            int time = config.getWorkTime(); // O config.getBreaktime() si estás en descanso
             String newTime = startCanvasAnimation(time);
         
             if (animationPostCanva != null) {

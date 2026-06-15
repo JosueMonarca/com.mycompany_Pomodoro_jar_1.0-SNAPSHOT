@@ -5,11 +5,13 @@ public class PomodoroConfig {
     private int workTime;
     private int breakTime;
     private int repetitions;
+    private int timeKeeper;
     
     private PomodoroConfig(){
         this.workTime = 0;
         this.breakTime = 0;
         this.repetitions = 0;
+        this.timeKeeper = 0;
     }
     
     public static PomodoroConfig getInstance(){
@@ -19,11 +21,19 @@ public class PomodoroConfig {
         return instance;
     }
 
-    public int getJob() {
+    public int getTimeKeeper() {
+        return timeKeeper;
+    }
+
+    public void setTimeKeeper(int timeKeeper) {
+        this.timeKeeper = timeKeeper;
+    }
+
+    public int getWorkTime() {
         return workTime;
     }
 
-    public void setJob(int work) {
+    public void setWorkTime(int work) {
         this.workTime = work;
     }
 
@@ -31,7 +41,7 @@ public class PomodoroConfig {
         return breakTime;
     }
 
-    public void setRest(int descanso) {
+    public void setBreakTime(int descanso) {
         this.breakTime = descanso;
     }
 

@@ -21,7 +21,7 @@ public class PomodoroCountView extends AbstractView {
         
         config.setRepetitions(Integer.parseInt(numberPomodoros));
         StringBuilder sb = new StringBuilder();
-        int totalSeconds = config.getJob();
+        int totalSeconds = config.getWorkTime();
 
         int hours = totalSeconds / 3600;
         sb.append(hours);
