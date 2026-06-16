@@ -17,9 +17,8 @@ public class PomodoroCountView extends AbstractView {
     @Override
     public boolean changeView() {
         PomodoroConfig config = PomodoroConfig.getInstance();
-        String numberPomodoros = view.getLabelClock().getText();
         
-        config.setRepetitions(Integer.parseInt(numberPomodoros));
+        config.setRepetitions(config.getTimeKeeper());
         StringBuilder sb = new StringBuilder();
         int totalSeconds = config.getWorkTime();
 
@@ -39,9 +38,10 @@ public class PomodoroCountView extends AbstractView {
             view.hideCanva();
             //Pomodoro.stopAnimation();
             stopAnimation.run();
+            config.setTimeKeeper(0);
             return true;
         }else{
-            view.setTextJOptionPane("Por favor ingrese un numero de veces valido es mayor de 0");
+            view.setTextJOptionPane("Por favor ingrese un numero de veces valido");
             return false;
         }  
     }   

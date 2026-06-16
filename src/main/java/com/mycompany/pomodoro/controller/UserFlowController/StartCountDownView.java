@@ -36,10 +36,10 @@ public class StartCountDownView extends AbstractView {
             animationPostCanva.accept(strBlr.toString());
             //Pomodoro.handlePomodoros();
             handlePomodoros.run();
+            config.setTimeKeeper(config.getWorkTime());
             return true;
         }else{
             return false;
         }
     }
-    
 }

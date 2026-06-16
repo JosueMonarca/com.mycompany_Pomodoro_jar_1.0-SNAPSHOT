@@ -4,28 +4,28 @@ package com.mycompany.pomodoro.controller;
 import java.awt.event.ActionEvent;
 
 import javax.sound.sampled.LineUnavailableException;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import com.mycompany.pomodoro.model.PomodoroConfig;
 import com.mycompany.pomodoro.view.ClockCanvas;
+import com.mycompany.pomodoro.view.ITimeDisplay;
 
 public class Animator {
     private final  ClockCanvas CANVA ;
-    private static ClockController controller ;
-    private static int lastDistance;
-    private static JLabel labelMain ;
-    private static PomodoroConfig instanceOfModel;
-    private static Integer counter = 1;
-    private static Timer timer;
-    private static Timer countdown;
-    private static Timer listenerLabel;
+    private final ClockController controller ;
+    private int lastDistance;
+    private PomodoroConfig instanceOfModel;
+    private Integer counter = 1;
+    private Timer timer;
+    private Timer countdown;
+    private Timer listenerLabel;
+    private final ITimeDisplay td;
     
-    public Animator(ClockCanvas Canva,ClockController controller,JLabel labelMain){
+    public Animator(ClockCanvas Canva,ClockController controller, ITimeDisplay td){
         CANVA = Canva;
-        Animator.controller = controller;
+        this.controller = controller;
         lastDistance = 0;
-        Animator.labelMain = labelMain;
+        this.td = td;
     }
     
     public void startCanvasAnimation(){
@@ -68,14 +68,9 @@ public class Animator {
     } 
     
     private  void adjustTime(int secondsDelta) {
-        String time = labelMain.getText();
-        String[] parts = time.split(":");
+        PomodoroConfig config =  PomodoroConfig.getInstance();
 
-        int hours = Integer.parseInt(parts[0]);
-        int minutes = Integer.parseInt(parts[1]);
-        int seconds = Integer.parseInt(parts[2]);
-
-        int total = hours * 3600 + minutes * 60 + seconds + secondsDelta*10;
+        int total = config.getTimeKeeper() + secondsDelta*10;
 
         if (total >= 86400) { // 24*60*60
             JOptionPane.showMessageDialog(null, "No se puede poner un pomodoro mayor a un día");
@@ -84,14 +79,13 @@ public class Animator {
             total = 0;
         }
 
-        hours = total / 3600;
-        minutes = (total % 3600) / 60;
-        seconds = total % 60;
+        int hours = total / 3600;
+        int minutes = (total % 3600) / 60;
+        int seconds = total % 60;
         
-        PomodoroConfig config = PomodoroConfig.getInstance();
         config.setTimeKeeper(total);
 
-        labelMain.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+        td.updateTime(String.format("%02d:%02d:%02d", hours, minutes, seconds));
     }
     
     private void adjustRepetitions(int direccion){
@@ -100,7 +94,7 @@ public class Animator {
         PomodoroConfig config = PomodoroConfig.getInstance();
         config.setTimeKeeper(counter);
         
-        labelMain.setText(String.format("%02d", counter));
+        td.updateTime(String.format("%02d", counter));
     }
     
     public void stopAnimation() {
@@ -119,17 +113,18 @@ public class Animator {
 
         countdown = new Timer(1000, (ActionEvent action) -> {
             String times = currentTime[0];
-            String[] partes = times.split(":");
-            int hours = Integer.parseInt(partes[0]);
-            int minutes = Integer.parseInt(partes[1]);
-            int seconds = Integer.parseInt(partes[2]);
+            String[] parts = times.split(":");
+            int hours = Integer.parseInt(parts[0]);
+            int minutes = Integer.parseInt(parts[1]);
+            int seconds = Integer.parseInt(parts[2]);
             int total = hours * 3600 + minutes * 60 + seconds -1;
             hours = total / 3600;
             minutes = (total % 3600) / 60;
             seconds = total % 60;
             String pibote1 = hours +":"+minutes+":"+seconds;
             currentTime[0] = pibote1;
-            labelMain.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+            config.setTimeKeeper(total);
+            td.updateTime(String.format("%02d:%02d:%02d", hours, minutes, seconds));
         });
         countdown.start();
     }
@@ -145,14 +140,12 @@ public class Animator {
         }                
         
         listenerLabel = new Timer(500 , (ActionEvent action) -> {
-            String times = labelMain.getText();
-            String[] partes = times.split(":");
             
-            int hours = Integer.parseInt(partes[0]);
-            int minutes = Integer.parseInt(partes[1]);
-            int seconds = Integer.parseInt(partes[2]);
+            int hours = 0;
+            int minutes = 0;
+            int seconds = 0;
             
-            int total = hours * 3600 + minutes * 60 + seconds;
+            int total = config.getTimeKeeper();
             
             if(total == 0 && config.getRepetitions() != 0 && !alreadyShot[0]){
                 alreadyShot[0] = true;
@@ -196,7 +189,6 @@ public class Animator {
                     animationPostCanva(sb.toString());
                     
                     try {
-                        SoundController.playFirstAlarm();
                         SoundController.playFirstAlarm();
                     } catch (LineUnavailableException ex) {
                         System.getLogger(Animator.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);

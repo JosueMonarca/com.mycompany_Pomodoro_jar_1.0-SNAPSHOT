@@ -10,8 +10,7 @@ public interface IView {
     public int showMensajeOfConfirm(String mensaje);
     public void setTextButtonPrincipal(String text);
     public JButton getButtonPrincipal();
-    public JLabel getLabelClock();// hay que eliminar esto
     public void hideCanva();
     public void hideButton();
-    public void showText(String text);
+    //public void showText(String text);
 }

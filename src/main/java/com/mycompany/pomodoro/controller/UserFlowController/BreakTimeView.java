@@ -14,22 +14,17 @@ public class BreakTimeView extends AbstractView{
         this.view = view;
         this.td = td;
     }
+    
     @Override
     public boolean changeView() {
-        String[] time = view.getLabelClock().getText().split(":");
-        
         PomodoroConfig config = PomodoroConfig.getInstance();
-        int hours =  Integer.parseInt(time[0]);
-        int minutes = Integer.parseInt(time[1]);
-        int seconds = Integer.parseInt(time[2]);
-        hours = hours * 3600;
-        minutes = minutes * 60;
-        int total = seconds + minutes + hours;
+        int total = config.getTimeKeeper();
         config.setBreakTime(total);
-        
+       
         if(config.getBreaktime() != 0){
             td.updateTime("00");
             view.setTextInstrucciones("Ingrese el numero de pomodoros a realizar");
+            config.setTimeKeeper(0);
             return true;
         }else{
             view.setTextJOptionPane("Por favor ingrese un numero valido");

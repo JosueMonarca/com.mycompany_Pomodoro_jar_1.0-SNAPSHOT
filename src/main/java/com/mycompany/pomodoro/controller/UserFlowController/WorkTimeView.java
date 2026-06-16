@@ -13,25 +13,19 @@ public class WorkTimeView extends AbstractView {
 
     @Override
     public boolean changeView() {
-        String[] time = view.getLabelClock().getText().split(":");
-        
-        int hours =  Integer.parseInt(time[0]);
-        int minutes = Integer.parseInt(time[1]);
-        int seconds = Integer.parseInt(time[2]);
-        hours = hours * 3600;
-        minutes = minutes * 60;
-        int total = seconds+minutes+hours;
         PomodoroConfig config = PomodoroConfig.getInstance();
+  
+        int total = config.getTimeKeeper();
         config.setWorkTime(total);
         
         if(config.getWorkTime() != 0){
             td.updateTime("00:00:00");
             view.setTextInstrucciones("Ingrese el tiempo de descanso");
+            config.setTimeKeeper(0);
             return true;
         }else{
             view.setTextJOptionPane("Por favor ingrese un tiempo valido");
             return false;
         }
     }
-    
 }

@@ -4,9 +4,7 @@ package com.mycompany.pomodoro.view;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import com.mycompany.pomodoro.view.ITimeDisplay;
 
 import com.mycompany.pomodoro.controller.UserFlowController.UserFlowController;
 
@@ -153,11 +151,6 @@ public class MainFrame extends javax.swing.JFrame implements IView, ITimeDisplay
     }
 
     @Override
-    public JLabel getLabelClock() {
-        return labelOfClock;
-    }
-
-    @Override
     public JButton getButtonPrincipal() {
         return jButton1;
     }
@@ -212,10 +205,6 @@ public class MainFrame extends javax.swing.JFrame implements IView, ITimeDisplay
     private com.mycompany.pomodoro.view.components.CustomPanel CustomPanel2;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void showText(String text) {
-
-    }
 
     @Override
     public void updateTime(String formattedTime) {

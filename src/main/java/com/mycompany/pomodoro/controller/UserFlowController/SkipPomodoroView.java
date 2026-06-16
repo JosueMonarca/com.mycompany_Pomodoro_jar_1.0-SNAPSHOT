@@ -25,13 +25,10 @@ public class SkipPomodoroView extends AbstractView {
 
     @Override
     public boolean changeView() {
-        String text = view.getLabelClock().getText();
-
         // Si el reloj ya terminó, no cambiar de view
-        if (text.equalsIgnoreCase("00:00:00")) {
-            return false;
-        }
-
+        PomodoroConfig config = PomodoroConfig.getInstance();
+        if (config.getTimeKeeper()== 0) return false;
+        
         int answer = view.showMensajeOfConfirm("¿Desea saltar la sesión actual?");
 
         switch (answer) {

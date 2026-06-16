@@ -1,6 +1,5 @@
 package com.mycompany.pomodoro.controller;
 
-import javax.swing.JLabel;
 
 import com.mycompany.pomodoro.controller.UserFlowController.UserFlowController;
 import com.mycompany.pomodoro.view.ClockCanvas;
@@ -22,8 +21,7 @@ public class App {
         canva.addMouseMotionListener(controller);
         
         // Crear Animator principal con canvas, controller y label del time
-        JLabel labelMain = mainFrame.getLabelClock();
-        Animator animator = new Animator(canva,controller,labelMain);
+        Animator animator = new Animator(canva,controller,mainFrame);
         
         // Configurar el flujo de pantallas y las acciones de usuario
         UserFlowController flowController = new UserFlowController( mainFrame, mainFrame );
