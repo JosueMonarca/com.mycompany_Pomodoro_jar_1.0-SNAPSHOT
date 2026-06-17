@@ -12,7 +12,7 @@ public class UserFlowController {
     private Runnable handlePomodoros;
     private PomodoroState pomodoroState = PomodoroState.CONFIGURE_WORK;
     private IView view = null;
-    private ITimeDisplay td;
+    private final ITimeDisplay td;
     
     public UserFlowController(IView view, ITimeDisplay td){
         this.view = view;
