@@ -1,7 +1,6 @@
 
 package com.mycompany.pomodoro.controller.UserFlowController;
 
-import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 
@@ -11,14 +10,10 @@ import com.mycompany.pomodoro.view.IView;
 
 public class SkipPomodoroView extends AbstractView {
     
-    private final Runnable stopAnimation;
-    private final Consumer<String> animationPostCanva;
-    private final Runnable handlePomodoros;
+    private final Runnable skipSession;
     
-    public SkipPomodoroView (Runnable stopAnimation,Consumer<String> animationPostCanva,Runnable handlePomodoros,IView viewFrame, ITimeDisplay td){
-        this.stopAnimation = stopAnimation;
-        this.animationPostCanva = animationPostCanva;
-        this.handlePomodoros = handlePomodoros;
+    public SkipPomodoroView (Runnable skipSession,IView viewFrame, ITimeDisplay td){
+        this.skipSession = skipSession;
         this.view = viewFrame;
         this.td = td;
     }
@@ -36,46 +31,12 @@ public class SkipPomodoroView extends AbstractView {
                 return false;
             }
             case JOptionPane.YES_OPTION -> {
-                this.skipPomodoroView();
+                this.skipSession.run();
                 return true;
             }
             default -> {
                 return false;
             }
-        }
-    }
-    
-    private void skipPomodoroView() {
-        // Detener animación actual si existe
-        if (stopAnimation != null) {
-            stopAnimation.run();
-        }
-
-        // Obtener configuración actual
-        PomodoroConfig config = PomodoroConfig.getInstance();
-
-        // Reducir el número de repetitions pendientes
-        int repetitions = config.getRepetitions();
-        if (repetitions >= 1) {
-            config.setRepetitions(repetitions - 1);
-
-            // Iniciar siguiente descanso o pomodoro
-            int time = config.getWorkTime(); // O config.getBreaktime() si estás en descanso
-            String newTime = startCanvasAnimation(time);
-        
-            if (animationPostCanva != null) {
-                animationPostCanva.accept(newTime);
-            }
-
-            if (handlePomodoros != null) {
-                handlePomodoros.run();
-            }
-        } else {
-            // Ya no quedan más pomodoros → Terminar ciclo
-            view.setTextJOptionPane("Todos los pomodoros han terminado.");
-            td.updateTime("00:00:00");
-            view.setTextInstrucciones("Has terminado");
-            view.hideButton();
         }
     }
     

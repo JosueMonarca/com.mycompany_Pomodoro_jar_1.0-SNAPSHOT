@@ -1,6 +1,4 @@
 package com.mycompany.pomodoro.controller;
-
-
 import com.mycompany.pomodoro.controller.UserFlowController.UserFlowController;
 import com.mycompany.pomodoro.view.ClockCanvas;
 import com.mycompany.pomodoro.view.MainFrame;
@@ -26,16 +24,16 @@ public class App {
         // Configurar el flujo de pantallas y las acciones de usuario
         UserFlowController flowController = new UserFlowController( mainFrame, mainFrame );
         PomodoroEngine pomEmgi = new PomodoroEngine(mainFrame);
-        flowController.setAnimationPostCanva((String time) -> {
-            pomEmgi.animationPostCanva(time);
-        });
-        flowController.sethandlePomodoros(() -> {
-            pomEmgi.handlePomodoros();
+        flowController.setStartSession(() -> {
+            pomEmgi.startSession();
         });
         flowController.setstopAnimation(() -> {
             animator.stopAnimation();
         });
+        flowController.setSkipSession(() -> {
+            pomEmgi.skipPhase();
+        });
         mainFrame.setControlador(flowController);
-        animator.startCanvasAnimation();//<- Iniciar animaciones y ejecución principal
+        animator.startCanvasAnimation();
     }
 }

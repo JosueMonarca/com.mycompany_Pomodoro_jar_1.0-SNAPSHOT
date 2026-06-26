@@ -1,121 +1,100 @@
-
 package com.mycompany.pomodoro.controller;
-
 import com.mycompany.pomodoro.model.PomodoroConfig;
 import com.mycompany.pomodoro.view.ITimeDisplay;
 import java.awt.event.ActionEvent;
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.Timer;
 
-
 public class PomodoroEngine {
-    private Timer countdown;
-    private Timer listenerLabel;
+    private Timer sessionTimer; 
     private final ITimeDisplay td;
+    private final PomodoroConfig config;
+    private boolean isWorkPhase; 
     
     public PomodoroEngine(ITimeDisplay td){
         this.td = td;
+        this.config = PomodoroConfig.getInstance();
     }
     
-     public void animationPostCanva(String time){
-        final String[] currentTime = { time };
-        PomodoroConfig config = PomodoroConfig.getInstance();
+    public void startSession(){
+        int actualTime = config.getWorkTime();
+        config.setTimeKeeper(actualTime);
+        this.updateDisplay(actualTime);
+        this.stopSession();
+        this.isWorkPhase = true;
+        config.setRepetitions((config.getRepetitions() * 2 ) - 1);
         
-        if ((countdown != null && countdown.isRunning()) || config.getRepetitions() ==0) {
-            countdown.stop();
-        }
-
-        countdown = new Timer(1000, (ActionEvent action) -> {
-            String times = currentTime[0];
-            String[] parts = times.split(":");
-            int hours = Integer.parseInt(parts[0]);
-            int minutes = Integer.parseInt(parts[1]);
-            int seconds = Integer.parseInt(parts[2]);
-            int total = hours * 3600 + minutes * 60 + seconds -1;
-            hours = total / 3600;
-            minutes = (total % 3600) / 60;
-            seconds = total % 60;
-            String pibote1 = hours +":"+minutes+":"+seconds;
-            currentTime[0] = pibote1;
-            config.setTimeKeeper(total);
-            td.updateTime(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+        sessionTimer =  new Timer(1000, (ActionEvent action)->{
+            this.handlePhaseTransition();
         });
-        countdown.start();
+        if (config.getWorkTime() >= 400) this.playSong();
+        sessionTimer.start();
+    }
+    
+    public void stopSession(){
+        if(sessionTimer != null && sessionTimer.isRunning()){
+            sessionTimer.stop();
+        }
+    }
+    private void countdownTick(){
+        config.setTimeKeeper(config.getTimeKeeper() - 1);
+        this.updateDisplay(config.getTimeKeeper());
     }
 
-    public void handlePomodoros(){
-        PomodoroConfig config = PomodoroConfig.getInstance();
-        config.setRepetitions((config.getRepetitions() * 2)-1);
-        boolean[] descanso = {false};
-        boolean[] alreadyShot = {false};
+    private void handlePhaseTransition(){
         
-        if (listenerLabel != null && listenerLabel.isRunning()) {
-            listenerLabel.stop();
-        }                
-        
-        listenerLabel = new Timer(500 , (ActionEvent action) -> {
+        if (config.getTimeKeeper() <= 0) {
             
-            int hours = 0;
-            int minutes = 0;
-            int seconds = 0;
+            config.setRepetitions(config.getRepetitions() - 1);
             
-            int total = config.getTimeKeeper();
-            
-            if(total == 0 && config.getRepetitions() != 0 && !alreadyShot[0]){
-                alreadyShot[0] = true;
-                config.setRepetitions(config.getRepetitions()-1);
-                if(!descanso[0]){
-                    descanso[0] = true;
-                    StringBuilder sb = new StringBuilder();
-                    int totalSeconds = config.getBreaktime();
-                    
-                    hours = totalSeconds / 3600;
-                    sb.append(hours);
-                    sb.append(":");
-                    minutes = (totalSeconds % 3600) / 60;
-                    sb.append(minutes);
-                    sb.append(":");
-                    seconds = totalSeconds % 60;
-                    sb.append(seconds);
-                    
-                    animationPostCanva(sb.toString());
-                    try {
-                        SoundController.playFirstAlarm();
-                        //SoundController.playFirstAlarm();
-                    } catch (LineUnavailableException ex) {
-                        System.getLogger(SetupController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-                        System.out.println("Error al reproducir");
-                    }
-                }else{
-                    descanso[0] = false;
-                    StringBuilder sb = new StringBuilder();
-                    int totalSeconds = config.getWorkTime();
-                    
-                    hours = totalSeconds / 3600;
-                    sb.append(hours);
-                    sb.append(":");
-                    minutes = (totalSeconds % 3600) / 60;
-                    sb.append(minutes);
-                    sb.append(":");
-                    seconds = totalSeconds % 60;
-                    sb.append(seconds);
-                    
-                    animationPostCanva(sb.toString());
-                    
-                    try {
-                        SoundController.playFirstAlarm();
-                    } catch (LineUnavailableException ex) {
-                        System.getLogger(SetupController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-                        System.out.println("Error al reproducir");
-                    }
-                }
+            if (config.getRepetitions() <= 0) {
+                this.updateDisplay(0); 
+                this.stopSession();    
+                return;                
             }
-            if(total > 0)  alreadyShot[0] = false;
-            if(config.getRepetitions() <=0){
-                listenerLabel.stop();
-                countdown.stop();
-            }
-        });
-        listenerLabel.start();
+
+            isWorkPhase = !isWorkPhase;
+            if (isWorkPhase) config.setTimeKeeper(config.getWorkTime());
+            else config.setTimeKeeper(config.getBreaktime());
+            
+            this.playFirstAlarm();
+            
+            this.updateDisplay(config.getTimeKeeper());
+            
+        } else {
+            countdownTick();
+        }
+    }
+
+    public void skipPhase(){
+        config.setTimeKeeper(0);
+        this.handlePhaseTransition();
+    }
+ 
+    private void updateDisplay(int totalSeconds) {
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
+        int seconds = totalSeconds % 60;
+        this.td.updateTime(String.format("%02d:%02d:%02d",hours,minutes,seconds));
+    }
+
+    private int playFirstAlarm() {
+        try {
+            SoundController.playFirstAlarm();
+        } catch (LineUnavailableException ex) {
+            System.getLogger(PomodoroEngine.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            return -1;
+        }
+        return 0;
+    }
+    
+    private int playSong() {
+        try {
+            SoundController.playSecondAlarm();
+        } catch (LineUnavailableException ex) {
+            System.getLogger(PomodoroEngine.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            return -1;
+        }
+        return 0;
     }
 }
