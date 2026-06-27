@@ -67,8 +67,13 @@ public class PomodoroEngine {
     }
 
     public void skipPhase(){
-        config.setTimeKeeper(0);
-        this.handlePhaseTransition();
+        try {
+            config.setTimeKeeper(0);
+            SoundController.stopSong();
+            this.handlePhaseTransition();
+        } catch (LineUnavailableException ex) {
+            System.getLogger(PomodoroEngine.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
  
     private void updateDisplay(int totalSeconds) {

@@ -1,6 +1,4 @@
-
 package com.mycompany.pomodoro.controller.UserFlowController;
-
 import com.mycompany.pomodoro.model.PomodoroConfig;
 import com.mycompany.pomodoro.view.ITimeDisplay;
 import com.mycompany.pomodoro.view.IView;

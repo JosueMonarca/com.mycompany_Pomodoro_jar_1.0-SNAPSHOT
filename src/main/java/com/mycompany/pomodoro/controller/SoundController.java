@@ -11,15 +11,39 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.mycompany.pomodoro.Pomodoro;
-import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineEvent;
 
 public class SoundController {
+    private static Clip clip;
+    private static Clip song;
+
+    public static Clip getClip() {
+        return clip;
+    }
+
+    public static Clip getSong() {
+        return song;
+    }
+    
+    public static void stopFirstAlarm() throws LineUnavailableException{
+       if(clip != null && clip.isRunning()){
+           clip.stop();
+           clip.close();
+       }
+    }
+    
+    public static void stopSong() throws LineUnavailableException{
+       if(song != null && song.isRunning()){
+           song.stop();
+           song.close();
+       }
+    }
+    
     public static void playFirstAlarm() throws LineUnavailableException{
         try{
             URL soundURL = Pomodoro.class.getResource("/alarma1.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.addLineListener((LineEvent event) -> {
                 if (event.getType() == javax.sound.sampled.LineEvent.Type.STOP) {
@@ -34,17 +58,17 @@ public class SoundController {
     }
     public static void playSecondAlarm() throws LineUnavailableException{
         try{
-             URL soundURL = Pomodoro.class.getResource("/Project_X.wav");
+            URL soundURL = Pomodoro.class.getResource("/Project_X.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.addLineListener((LineEvent event) -> {
+            song = AudioSystem.getClip();
+            song.open(audioIn);
+            song.addLineListener((LineEvent event) -> {
                 if (event.getType() == javax.sound.sampled.LineEvent.Type.STOP) {
-                    clip.close(); // ¡Libera la RAM y la tarjeta de sonido!
+                    song.close(); // ¡Libera la RAM y la tarjeta de sonido!
                 }
              });
 
-            clip.start();
+            song.start();
         }catch(IOException | UnsupportedAudioFileException e){
 
         }
