@@ -7,7 +7,8 @@ public class Pomodoro {
     
     public static void main(String[] args) {
         try {
-            App.run();
+            App app = new App();
+            app.run();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }

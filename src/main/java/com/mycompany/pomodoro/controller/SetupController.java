@@ -83,8 +83,8 @@ public class SetupController {
         td.updateTime(String.format("%02d:%02d:%02d", hours, minutes, seconds));
     }
     
-    private void adjustRepetitions(int direccion){
-        if(counter > 0) counter = counter + direccion;
+    private void adjustRepetitions(int direction){
+        if(counter > 0) counter = counter + direction;
         else counter = 1; 
         PomodoroConfig config = PomodoroConfig.getInstance();
         config.setTimeKeeper(counter);
@@ -96,5 +96,14 @@ public class SetupController {
         if (timer != null && timer.isRunning()) {
             timer.stop();
         }
+    }
+    
+    public void ajustDial(Direction direction){
+        if (direction == Direction.RIGHT) this.CANVA.animationRight();
+        else this.CANVA.animationLeft();
+        
+        if (instanceOfModel.getBreaktime() == 0 || instanceOfModel.getWorkTime() == 0)
+            this.adjustTime(direction == Direction.RIGHT? -1 : 1);
+        else this.adjustRepetitions(direction == Direction.RIGHT? -1 : 1);
     }
 }
